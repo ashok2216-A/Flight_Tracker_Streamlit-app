@@ -94,5 +94,5 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
     return out
 
 
-flight_tracking(flight_view_level=2, country='india',
-            local_time_zone='Asia/Kolkata', airport=0, flight_info='origin_country', color='rainbow')
+# flight_tracking(flight_view_level=2, country='india',
+#             local_time_zone='Asia/Kolkata', airport=0, flight_info='origin_country', color='rainbow')
