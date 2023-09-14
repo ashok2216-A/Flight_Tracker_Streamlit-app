@@ -100,14 +100,9 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
 st.set_page_config(
     layout="wide"
 )
-# add_selectbox = st.sidebar(
-#     "Configure Map",divider='rainbow'
-# )
-add_selectbox = st.sidebar.selectbox(
-    "How would you like to be contacted?",
-    ("Email", "Home phone", "Mobile phone")
+add_selectbox = st.sidebar.header(
+    "Configure Map",divider='rainbow'
 )
-
 with st.sidebar:
     Refresh = st.button('Update Map', key=1)
     on = st.toggle('View Airports')
