@@ -112,7 +112,7 @@ with st.sidebar:
         st.write('Now Airports are Visible')
     else:
         air_port=0
-    view = st.slider('Select Flight View',1,6,2)
+    view = st.slider('Increase Flight Visibility',1,6,2)
     st.write("You Selected:", view)
     cou = st.text_input('Type Country Name', 'america')
     st.write('The current Country name is', cou)
