@@ -101,7 +101,7 @@ st.set_page_config(
     layout="wide"
 )
 add_selectbox = st.sidebar.subheader(
-    "Configure Map"
+    "Configure Map",divider='rainbow'
 )
 with st.sidebar:
     Refresh = st.button('Update Map', key=1)
