@@ -103,6 +103,11 @@ st.set_page_config(
 # add_selectbox = st.sidebar(
 #     "Configure Map",divider='rainbow'
 # )
+add_selectbox = st.sidebar.selectbox(
+    "How would you like to be contacted?",
+    ("Email", "Home phone", "Mobile phone")
+)
+
 with st.sidebar:
     Refresh = st.button('Update Map', key=1)
     on = st.toggle('View Airports')
