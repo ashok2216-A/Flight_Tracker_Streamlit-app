@@ -100,7 +100,7 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
 st.set_page_config(
     layout="wide"
 )
-add_selectbox = st.sidebar.header(
+add_selectbox = st.sidebar.subheader(
     "Configure Map",divider='rainbow'
 )
 with st.sidebar:
