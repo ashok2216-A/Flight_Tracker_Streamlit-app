@@ -18,16 +18,17 @@ import streamlit as st
 
 
 def flight_tracking(flight_view_level, country, local_time_zone, flight_info, airport, color):
-    
     geolocator = Nominatim(user_agent="flight_tracker")
     loc = geolocator.geocode(country)
     loc_box = loc[1]
+
     extend_left =+12*flight_view_level
     extend_right =+10*flight_view_level
     extend_top =+10*flight_view_level
     extend_bottom =+ 18*flight_view_level
     lat_min, lat_max = (loc_box[0] - extend_left), loc_box[0]+extend_right
     lon_min, lon_max = (loc_box[1] - extend_bottom), loc_box[1]+extend_top
+    
     tile_zoom = 8 # zoom of the map loaded by contextily
     figsize = (15, 15)
     columns = ["icao24","callsign","origin_country","time_position","last_contact","longitude","latitude",
@@ -50,14 +51,13 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
                 f"&lamax={str(lat_max)}"
                 f"&lomax={str(lon_max)}")
         json_dict = requests.get(url_data).json()
+
         unix_timestamp = int(json_dict["time"])
         local_timezone = pytz.timezone(local_time_zone) # get pytz timezone
         local_time = datetime.fromtimestamp(unix_timestamp, local_timezone).strftime('%Y-%m-%d %H:%M:%S')
-
         time = []
         for i in range(len(json_dict['states'])):
             time.append(local_time)
-
         df_time = pd.DataFrame(time,columns=['time'])
         state_df = pd.DataFrame(json_dict["states"],columns=columns)
         state_df['time'] = df_time
@@ -75,7 +75,7 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
         st.write('Number of Visible Flights: {}'.format(len(json_dict['states'])))
         st.write('Plotting the flight: {}'.format(flight_info))
         st.subheader('Map Visualization', divider='rainbow')
-        st.write('****Press ":rainbow[Update Map]" Button to Refresh the Map****')
+        st.write('****Click ":orange[Update Map]" Button to Refresh the Map****')
         return gdf
 
     geo_df = get_traffic_gdf()
@@ -116,14 +116,14 @@ with st.sidebar:
     st.write("You Selected:", view)
     cou = st.text_input('Type Country Name', 'america')
     st.write('The current Country name is', cou)
-    time = st.text_input('Type Time Zone Name', 'Asia/Kolkata')
+    time = st.text_input('Type Time Zone Name (Ex: America/Toronto, Europe/Berlin)', 'Asia/Kolkata')
     st.write('The current Time Zone is', time)
     info = st.selectbox(
     'Select Flight Information',
     ('baro_altitude',
         'on_ground', 'velocity',
         'geo_altitude'))
-    st.write('Plotting the Data of Flight:', info)
+    st.write('Plotting the data of Flight:', info)
     clr = st.radio('Pick A Color for Scatter Plot',["rainbow","ice","hot"])
     if clr == "rainbow":
         st.write('The current color is', "****:rainbow[Rainbow]****")
