@@ -16,12 +16,10 @@ import plotly.express as px
 import streamlit as st
 
 
-
 def flight_tracking(flight_view_level, country, local_time_zone, flight_info, airport, color):
     geolocator = Nominatim(user_agent="flight_tracker")
     loc = geolocator.geocode(country)
     loc_box = loc[1]
-
     extend_left =+12*flight_view_level
     extend_right =+10*flight_view_level
     extend_top =+10*flight_view_level
