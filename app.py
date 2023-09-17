@@ -5,6 +5,7 @@ import geopandas as gpd
 import contextily as ctx
 import tzlocal
 import pytz
+from PIL import Image
 from datetime import datetime
 import matplotlib.pyplot as plt
 from geopy.exc import GeocoderTimedOut
@@ -102,7 +103,8 @@ add_selectbox = st.sidebar.subheader(
     "Configure Map",divider='rainbow'
 )
 with st.sidebar:
-    st.image('logo.png')
+    image = Image.open('logo.png')
+    st.image(image, width=50)
     Refresh = st.button('Update Map', key=1)
     on = st.toggle('View Airports')
     if on:
