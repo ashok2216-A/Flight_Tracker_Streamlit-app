@@ -99,12 +99,13 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
 st.set_page_config(
     layout="wide"
 )
+image = Image.open('logo.png')
+add_selectbox = st.sidebar.image(
+    image, width=100
+)
 add_selectbox = st.sidebar.subheader(
     "Configure Map",divider='rainbow'
 )
-image = Image.open('logo.png')
-add_selectbox = st.sidebar.image(
-image, width=100)
 with st.sidebar:
     Refresh = st.button('Update Map', key=1)
     on = st.toggle('View Airports')
