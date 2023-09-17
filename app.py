@@ -102,9 +102,9 @@ st.set_page_config(
 add_selectbox = st.sidebar.subheader(
     "Configure Map",divider='rainbow'
 )
+image = Image.open('logo.png')
 add_selectbox = st.sidebar.image(
-    image = Image.open('logo.png'),
-    st.image(image, width=100))
+image, width=100)
 with st.sidebar:
     Refresh = st.button('Update Map', key=1)
     on = st.toggle('View Airports')
