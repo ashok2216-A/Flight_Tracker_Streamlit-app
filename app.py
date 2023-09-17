@@ -65,8 +65,8 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
                 geometry=gpd.points_from_xy(state_df.longitude, state_df.latitude),
                 crs={"init": "epsg:4326"},  # WGS84
             )
-        image = Image.open('banner.png')
-        st.image(image, width=300)
+        banner_image = Image.open('banner.png')
+        st.image(banner_image, width=300)
         st.title("Live Flight Tracker")
         st.subheader('Flight Details', divider='rainbow')
         st.write('Location: {0}'.format(loc))
