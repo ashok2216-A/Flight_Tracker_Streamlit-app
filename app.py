@@ -102,6 +102,7 @@ add_selectbox = st.sidebar.subheader(
     "Configure Map",divider='rainbow'
 )
 with st.sidebar:
+    st.image('logo.png')
     Refresh = st.button('Update Map', key=1)
     on = st.toggle('View Airports')
     if on:
