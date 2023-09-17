@@ -101,7 +101,7 @@ st.set_page_config(
 )
 image = Image.open('logo.png')
 add_selectbox = st.sidebar.image(
-    image, width=100
+    image, width=150
 )
 add_selectbox = st.sidebar.subheader(
     "Configure Map",divider='rainbow'
