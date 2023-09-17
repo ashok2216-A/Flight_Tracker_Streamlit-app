@@ -66,7 +66,7 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
                 crs={"init": "epsg:4326"},  # WGS84
             )
         image = Image.open('logo.png')
-        st.image(image, width=50)
+        st.image(image, width=100)
         st.title("Live Flight Tracker")
         st.subheader('Flight Details', divider='rainbow')
         st.write('Location: {0}'.format(loc))
