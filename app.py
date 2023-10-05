@@ -138,11 +138,8 @@ with st.sidebar:
         st.write('The current color is', "****:red[Hot]****")
     else: None
 
+try:
 flight_tracking(flight_view_level=view, country=cou,flight_info=info,
                 local_time_zone=time, airport=air_port, color=clr)
-e = TypeError('This is an exception of type TypeError')
-st.exception(e)
-
-# except TypeError as e: 
-#     print("Please Refresh this page.")
-# st.exception(e)
+except TypeError:
+    st.title("Please Refresh this page.")
