@@ -74,7 +74,7 @@ def flight_tracking(flight_view_level, country, local_time_zone, airport, color)
         st.write("Minimum_latitude is {0} and Maximum_latitude is {1}".format(lat_min, lat_max))
         st.write("Minimum_longitude is {0} and Maximum_longitude is {1}".format(lon_min, lon_max))
         st.write('Number of Visible Flights: {}'.format(len(json_dict['states'])))
-        st.write('Plotting the flight: {}'.format(flight_info))
+        # st.write('Plotting the flight: {}'.format(flight_info))
         st.subheader('Map Visualization', divider='rainbow')
         st.write('****Click ":orange[Update Map]" Button to Refresh the Map****')
         return gdf
