@@ -16,8 +16,8 @@ from plotly.graph_objs import Marker
 import plotly.express as px
 import streamlit as st
 
-
-def flight_tracking(flight_view_level, country, local_time_zone, flight_info, airport, color):
+# , flight_info
+def flight_tracking(flight_view_level, country, local_time_zone, airport, color):
     geolocator = Nominatim(user_agent="flight_tracker")
     loc = geolocator.geocode(country)
     loc_box = loc[1]
@@ -81,12 +81,14 @@ def flight_tracking(flight_view_level, country, local_time_zone, flight_info, ai
 
     geo_df = get_traffic_gdf()
     if airport == 0:
-        fig = px.scatter_mapbox(geo_df, lat="latitude", lon="longitude",color=flight_info,
+        # color=flight_info,
+        fig = px.scatter_mapbox(geo_df, lat="latitude", lon="longitude",
                             color_continuous_scale=color, zoom=4,width=1200, height=600,opacity=1,
                             hover_name ='origin_country',hover_data=['callsign', 'baro_altitude',
         'on_ground', 'velocity', 'true_track', 'vertical_rate', 'geo_altitude'], template='plotly_dark')
     elif airport == 1:
-        fig = px.scatter_mapbox(geo_df, lat="latitude", lon="longitude",color=flight_info,
+        # color=flight_info,
+        fig = px.scatter_mapbox(geo_df, lat="latitude", lon="longitude",
                             color_continuous_scale=color, zoom=4,width=1200, height=600,opacity=1,
                             hover_name ='origin_country',hover_data=['callsign', 'baro_altitude',
         'on_ground', 'velocity', 'true_track', 'vertical_rate', 'geo_altitude'], template='plotly_dark')
@@ -123,12 +125,12 @@ with st.sidebar:
     st.write('The current Country name is', cou)
     time = st.text_input('Type Time Zone Name (Ex: America/Toronto, Europe/Berlin)', 'Asia/Kolkata')
     st.write('The current Time Zone is', time)
-    info = st.selectbox(
-    'Select Flight Information',
-    ('baro_altitude',
-        'on_ground', 'velocity',
-        'geo_altitude'))
-    st.write('Plotting the data of Flight:', info)
+    # info = st.selectbox(
+    # 'Select Flight Information',
+    # ('baro_altitude',
+    #     'on_ground', 'velocity',
+    #     'geo_altitude'))
+    # st.write('Plotting the data of Flight:', info)
     clr = st.radio('Pick A Color for Scatter Plot',["rainbow","ice","hot"])
     if clr == "rainbow":
         st.write('The current color is', "****:rainbow[Rainbow]****")
@@ -137,5 +139,6 @@ with st.sidebar:
     elif clr == 'hot':
         st.write('The current color is', "****:red[Hot]****")
     else: None
+ # flight_info=info
 flight_tracking(flight_view_level=view, country=cou,
-            local_time_zone=time, airport=air_port, flight_info=info, color=clr)
+            local_time_zone=time, airport=air_port, color=clr)
