@@ -139,7 +139,7 @@ with st.sidebar:
     else: None
 
 try:
-flight_tracking(flight_view_level=view, country=cou,flight_info=info,
+    flight_tracking(flight_view_level=view, country=cou,flight_info=info,
                 local_time_zone=time, airport=air_port, color=clr)
 except TypeError:
     st.title("Please Refresh this page.")
