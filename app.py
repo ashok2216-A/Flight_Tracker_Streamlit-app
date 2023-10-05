@@ -143,4 +143,4 @@ try:
                 local_time_zone=time, airport=air_port, color=clr)
 except TypeError:
     st.error(':red[Error: ] Please Re-run this page.', icon="🚨")
-    st.rerun()
+    st.button('Re-run', type="primary")
