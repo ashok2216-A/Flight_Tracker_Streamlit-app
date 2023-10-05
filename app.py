@@ -142,4 +142,5 @@ try:
     flight_tracking(flight_view_level=view, country=cou,flight_info=info,
                 local_time_zone=time, airport=air_port, color=clr)
 except TypeError:
-    st.error(':red[Error: ] Please Re-run this page.', icon="🚨")
+    st.info('This is a purely informational message', icon="ℹ️")
+    # st.error(':red[Error: ] Please Re-run this page.', icon="🚨")
