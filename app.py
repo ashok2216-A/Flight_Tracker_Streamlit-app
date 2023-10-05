@@ -119,7 +119,7 @@ with st.sidebar:
         air_port=0
     view = st.slider('Increase Flight Visibility',1,6,2)
     st.write("You Selected:", view)
-    cou = st.text_input('Type Country Name', 'north america')
+    cou = st.text_input('Type Country Name', 'canada')
     st.write('The current Country name is', cou)
     time = st.text_input('Type Time Zone Name (Ex: America/Toronto, Europe/Berlin)', 'Asia/Kolkata')
     st.write('The current Time Zone is', time)
