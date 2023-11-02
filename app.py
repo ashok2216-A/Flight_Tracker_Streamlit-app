@@ -146,3 +146,4 @@ with st.spinner('Wait!, We Requesting API Data...'):
         st.error(':red[Error: ] Please Re-run this page.', icon="🚨")
         st.button('Re-run', type="primary")
 st.balloons()
+ 
