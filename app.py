@@ -138,6 +138,9 @@ with st.sidebar:
         st.write('The current color is', "****:red[Hot]****")
     else: None
 
+with st.spinner('Wait for it...'):
+    time.sleep(5)
+st.success('Done!')
 try:
     flight_tracking(flight_view_level=view, country=cou,flight_info=info,
                 local_time_zone=time, airport=air_port, color=clr)
