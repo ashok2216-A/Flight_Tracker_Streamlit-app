@@ -145,4 +145,4 @@ with st.spinner('Wait for it...'):
     except TypeError:
         st.error(':red[Error: ] Please Re-run this page.', icon="🚨")
         st.button('Re-run', type="primary")
-st.success('Done!')
+
