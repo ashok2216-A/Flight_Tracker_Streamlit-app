@@ -4,7 +4,7 @@ import pandas as pd
 import geopandas as gpd
 import contextily as ctx
 import tzlocal
-import pytz
+import pytz 
 from PIL import Image
 from datetime import datetime
 import matplotlib.pyplot as plt
