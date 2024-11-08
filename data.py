@@ -63,5 +63,5 @@ def flight_data(flight_view_level, country, local_time_zone, flight_info, airpor
             geometry=gpd.points_from_xy(state_df.longitude, state_df.latitude),
             crs={"init": "epsg:4326"},  # WGS84
         )
-
+    return gdf
 # geo_df = flight_tracking(flight_view_level = 6, country= 'India', local_time_zone='Asia/Kolkata', flight_info='baro_altitude', airport=1)
