@@ -210,7 +210,7 @@ with st.sidebar:
 # try:
 flight_tracking(flight_view_level=view, country=cou,flight_info=info,
             local_time_zone=time, airport=air_port, color=clr)
-st.subheader('Ask your Questions!', divider='rainbow')
+st.subheader('Type your Questions here', divider='rainbow')
 st.write("Google's TAPAS base LLM model 🤖")
 geo_df = flight_data(flight_view_level = view, country= cou, flight_info=info, local_time_zone=time, airport=1)
 question = st.text_input('Ask your question', "What is the squawk code for SWR9XD?")
