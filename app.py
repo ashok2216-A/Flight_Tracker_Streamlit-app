@@ -66,7 +66,7 @@ def query_flight_data(geo_df, question):
     # Check if 'answer' is in response and return it as a sentence
     if 'answer' in response:
         answer = response['answer']
-        return f"The answer to your question '{question}' is: :orange[{answer}]."
+        return f"The answer to your question '{question}': :orange[{answer}]."
     else:
         return "The model could not find an answer to your question."
 
