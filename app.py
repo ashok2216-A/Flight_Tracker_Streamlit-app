@@ -66,7 +66,7 @@ def query_flight_data(geo_df, question):
     # Check if 'answer' is in response and return it as a sentence
     if 'answer' in response:
         answer = response['answer']
-        return f"The answer to your question '{question}': :orange[{answer}]."
+        return f"The answer to your question '{question}': :orange[{answer}]"
     else:
         return "The model could not find an answer to your question."
 
@@ -195,6 +195,7 @@ with st.sidebar:
 # try:
 flight_tracking(flight_view_level=view, country=cou,flight_info=info,
             local_time_zone=time, airport=air_port, color=clr)
+st.subheader('Ask something to TAPAS base model fine-tuned on WikiTable Questions (WTQ)', divider='rainbow')
 geo_df = flight_data(flight_view_level = view, country= cou, flight_info=info, local_time_zone=time, airport=1)
 question = st.text_input('Ask your question', "What is the squawk code for SWR9XD?")
 result = query_flight_data(geo_df, question)
