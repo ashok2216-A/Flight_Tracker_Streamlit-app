@@ -15,7 +15,7 @@ warnings.filterwarnings('ignore')
 from plotly.graph_objs import Marker
 import plotly.express as px
 
-def flight_tracking(flight_view_level, country, local_time_zone, flight_info, airport):
+def flight_data(flight_view_level, country, local_time_zone, flight_info, airport):
     geolocator = Nominatim(user_agent="flight_tracker")
     loc = geolocator.geocode(country)
     loc_box = loc[1]
