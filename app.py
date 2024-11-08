@@ -1,6 +1,8 @@
 import requests
 import json
 import pandas as pd
+import numpy as np
+import requests
 import geopandas as gpd
 import contextily as ctx
 import tzlocal
@@ -15,6 +17,58 @@ warnings.filterwarnings('ignore')
 from plotly.graph_objs import Marker
 import plotly.express as px
 import streamlit as st
+from data import flight_data
+
+
+API_URL = "https://api-inference.huggingface.co/models/google/tapas-base-finetuned-wtq"
+headers = {"Authorization": "Bearer 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"}
+
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
+
+def query_flight_data(geo_df, question):
+
+
+    table_data = {
+        "icao24": geo_df["icao24"].astype(str).iloc[:100].tolist(),
+        "callsign": geo_df["callsign"].astype(str).replace({np.nan: None, np.inf: '0'}).iloc[:100].tolist(),
+        "origin_country": geo_df["origin_country"].astype(str).replace({np.nan: None, np.inf: '0'}).iloc[:100].tolist(),
+        "time_position": geo_df["time_position"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "last_contact": geo_df["last_contact"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "longitude": geo_df["longitude"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "latitude": geo_df["latitude"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "baro_altitude": geo_df["baro_altitude"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "on_ground": geo_df["on_ground"].astype(str).iloc[:100].tolist(),  # Assuming on_ground is boolean or categorical
+        "velocity": geo_df["velocity"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "true_track": geo_df["true_track"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "vertical_rate": geo_df["vertical_rate"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "sensors": geo_df["sensors"].astype(str).replace({np.nan: None, np.inf: '0'}).iloc[:100].tolist(), # Assuming sensors can be None
+        "geo_altitude": geo_df["geo_altitude"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "squawk": geo_df["squawk"].astype(str).replace({np.nan: None, np.inf: '0'}).iloc[:100].tolist(), # Assuming squawk can be None
+        "spi": geo_df["spi"].astype(str).iloc[:100].tolist(),  # Assuming spi is boolean or categorical
+        "position_source": geo_df["position_source"].astype(str).iloc[:100].tolist(),  # Assuming position_source is categorical
+        "time": geo_df["time"].astype(str).replace({np.nan: '0', np.inf: '0'}).iloc[:100].tolist(),
+        "geometry": geo_df["geometry"].astype(str).replace({np.nan: None, np.inf: '0'}).iloc[:100].tolist() # Assuming geometry can be None
+    }
+
+    # Construct the payload
+    payload = {
+        "inputs": {
+            "query": question,
+            "table": table_data,
+        }
+    }
+
+    # Get the model response
+    response = query(payload)
+
+    # Check if 'answer' is in response and return it as a sentence
+    if 'answer' in response:
+        answer = response['answer']
+        return f"The answer to your question '{question}' is: {answer}."
+    else:
+        return "The model could not find an answer to your question."
 
 
 def flight_tracking(flight_view_level, country, local_time_zone, flight_info, airport, color):
@@ -141,6 +195,10 @@ with st.sidebar:
 try:
     flight_tracking(flight_view_level=view, country=cou,flight_info=info,
                 local_time_zone=time, airport=air_port, color=clr)
+    geo_df = flight_data(flight_view_level = view, country= cou, local_time_zone=time, airport=1)
+    question = st.text_input('Ask your question', "What is the squawk code for SWR9XD?")
+    result = query_flight_data(geo_df, question)
+    st.markdown(result)
 except TypeError:
     st.error(':red[Error: ] Please Re-run this page.', icon="🚨")
     st.button('Re-run', type="primary")
