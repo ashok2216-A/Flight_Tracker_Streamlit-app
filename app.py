@@ -36,7 +36,7 @@ from data import flight_data
 
 
 API_URL = "https://api-inference.huggingface.co/models/google/tapas-base-finetuned-wtq"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "Bearer hf_PkDQtQgwrHPWxxxxxxxxxxxxxxxxxxxxxxxxxc"}
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
